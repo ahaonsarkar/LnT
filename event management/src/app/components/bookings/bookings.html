@@ -1,0 +1,27 @@
+<div class="bookings-container">
+  <h1>My Journey</h1>
+  @if (bookings().length > 0) {
+    <table class="bookings-table">
+      <thead>
+        <tr>
+          <th>Event Experience</th>
+          <th>Voyager</th>
+          <th>Contact</th>
+          <th>Tickets</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (booking of bookings(); track booking.id) {
+          <tr>
+            <td class="event-name">{{ getEventName(booking.eventId) }}</td>
+            <td class="user-name">{{ booking.name }}</td>
+            <td>{{ booking.email }}</td>
+            <td><span class="ticket-count">{{ booking.tickets }}</span></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <p class="empty-msg">You haven't planned any journeys yet.</p>
+  }
+</div>

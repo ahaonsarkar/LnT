@@ -1,0 +1,49 @@
+<div class="detail-container">
+  @if (event) {
+    <div class="event-header">
+      <a routerLink="/events" class="back-link">← EXPLORE MORE</a>
+      <span class="category">{{ event.category }}</span>
+      <h1>{{ event.name }}</h1>
+    </div>
+
+    <div class="event-content">
+      <div class="info-section">
+        <div class="info-item">
+          <i>📅</i>
+          <div>
+            <div class="label">Date</div>
+            <div class="value">{{ event.date | date:'fullDate' }}</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <i>📍</i>
+          <div>
+            <div class="label">Location</div>
+            <div class="value">{{ event.location }}</div>
+          </div>
+        </div>
+        
+        <div class="description">
+          <p>{{ event.description }}</p>
+        </div>
+      </div>
+
+      <div class="booking-section">
+        <div class="price-display">₹{{ event.price }}</div>
+        <div class="seats-left">{{ event.seatsAvailable }} spots remaining</div>
+        
+        @if (event.seatsAvailable > 0) {
+          @if (!showBookingForm) {
+            <button (click)="showBookingForm = true" class="book-btn">Confirm Reservation</button>
+          } @else {
+            <app-booking-form [event]="event" (booked)="showBookingForm = false"></app-booking-form>
+          }
+        } @else {
+          <p class="sold-out">Sold Out</p>
+        }
+      </div>
+    </div>
+  } @else {
+    <p>Event not found.</p>
+  }
+</div>

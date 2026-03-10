@@ -1,0 +1,78 @@
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: left;
+}
+
+label {
+  font-weight: 700;
+  color: var(--text-color);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+input {
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: var(--text-color);
+  transition: all 0.3s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  background: rgba(255, 153, 51, 0.05);
+  box-shadow: 0 0 0 4px rgba(255, 153, 51, 0.1);
+}
+
+input::placeholder {
+  color: #555;
+}
+
+.error {
+  color: var(--ruby-red);
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.submit-btn {
+  background: linear-gradient(135deg, var(--accent-color), #2e7d32);
+  color: white;
+  border: none;
+  padding: 1.4rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.4s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 1rem;
+  box-shadow: 0 10px 20px rgba(19, 136, 8, 0.2);
+}
+
+.submit-btn:disabled {
+  background: #333;
+  color: #666;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(19, 136, 8, 0.4);
+  filter: brightness(1.2);
+}

@@ -1,0 +1,25 @@
+<form [formGroup]="bookingForm" (ngSubmit)="onSubmit()" class="booking-form">
+  <h3>Booking Form</h3>
+  <div class="form-field">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name">
+    @if (bookingForm.get('name')?.invalid && bookingForm.get('name')?.touched) {
+      <p class="error">Name must be at least 3 characters.</p>
+    }
+  </div>
+  <div class="form-field">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email">
+    @if (bookingForm.get('email')?.invalid && bookingForm.get('email')?.touched) {
+      <p class="error">Valid email is required.</p>
+    }
+  </div>
+  <div class="form-field">
+    <label for="tickets">Tickets (Max 10):</label>
+    <input type="number" id="tickets" formControlName="tickets">
+    @if (bookingForm.get('tickets')?.invalid && bookingForm.get('tickets')?.touched) {
+      <p class="error">Select between 1 and 10 tickets.</p>
+    }
+  </div>
+  <button type="submit" [disabled]="bookingForm.invalid" class="submit-btn">Confirm Booking</button>
+</form>
