@@ -1,0 +1,26 @@
+<div class="card">
+
+  <div class="card-header">
+    <div class="card-category-tag">{{ item.category | titlecase }}</div>
+  </div>
+
+  <div class="card-body">
+    <h3 class="card-name">{{ item.name }}</h3>
+    <p class="card-desc">{{ item.desc }}</p>
+
+    <div class="card-footer">
+      <div class="card-price">
+        ₹{{ item.price }}
+      </div>
+
+      <button *ngIf="qty === 0" class="btn-add" (click)="add()">+ Add</button>
+
+      <div *ngIf="qty > 0" class="qty-ctrl">
+        <button class="qty-btn" (click)="remove()">−</button>
+        <span class="qty-num">{{ qty }}</span>
+        <button class="qty-btn" (click)="add()">+</button>
+      </div>
+    </div>
+  </div>
+
+</div>

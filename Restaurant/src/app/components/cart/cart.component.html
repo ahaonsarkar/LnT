@@ -1,0 +1,81 @@
+
+<div class="drawer-backdrop" [class.open]="isOpen" (click)="close()"></div>
+
+
+<aside class="cart-drawer" [class.open]="isOpen">
+
+  <div class="cart-header">
+    <h2 class="cart-title">Your Order</h2>
+    <div class="header-actions">
+      <button *ngIf="count > 0" class="clear-btn" (click)="clearCart()">Clear all</button>
+      <button class="close-btn" (click)="close()">&#x2715;</button>
+    </div>
+  </div>
+
+  <div class="cart-body">
+    <div *ngIf="count === 0" class="cart-empty">
+      <div class="empty-box">No items yet</div>
+      <p>Add dishes from the menu to get started.</p>
+    </div>
+
+    <ng-container *ngFor="let item of cartService.cart$ | async; trackBy: trackById">
+      <div class="cart-item">
+        <div class="item-info">
+          <div class="item-name">{{ item.name }}</div>
+          <div class="item-cat">{{ item.category | titlecase }}</div>
+        </div>
+        <div class="item-right">
+          <div class="item-qty">
+            <button class="qty-btn" (click)="remove(item.id)">−</button>
+            <span class="qty-num">{{ item.qty }}</span>
+            <button class="qty-btn" (click)="add(item)">+</button>
+          </div>
+          <div class="item-price">&#8377;{{ item.price * item.qty }}</div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div *ngIf="count > 0" class="order-summary">
+    <div class="table-area">
+      <label class="field-label">Select Table</label>
+      <div class="table-grid">
+        <button
+          *ngFor="let t of tables"
+          class="table-chip"
+          [class.selected]="selectedTable === t"
+          (click)="selectTable(t)"
+        >Table {{ t }}</button>
+      </div>
+    </div>
+
+    <div class="summary-rows">
+      <div class="summary-row"><span>Subtotal</span><span>&#8377;{{ subtotal }}</span></div>
+      <div class="summary-row"><span>Taxes &amp; Fees (5%)</span><span>&#8377;{{ tax }}</span></div>
+      <div class="summary-row summary-total">
+        <span>Total</span>
+        <span class="total-amount">&#8377;{{ total }}</span>
+      </div>
+    </div>
+
+    <button class="checkout-btn" (click)="placeOrder()">Place Order</button>
+  </div>
+
+</aside>
+
+<div class="modal-overlay" [class.open]="orderPlaced" (click)="closeModal()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="modal-check">Order Confirmed</div>
+    <h2 class="modal-heading">Your order is placed!</h2>
+    <p class="modal-subtext">
+      Our chefs are preparing your meal with care.
+      Estimated time: <strong>20-30 minutes</strong>
+    </p>
+    <div class="modal-order-id">
+      {{ lastOrderId }}
+      <span *ngIf="selectedTable"> &middot; Table {{ selectedTable }}</span>
+      <span *ngIf="!selectedTable"> &middot; Takeaway</span>
+    </div>
+    <button class="modal-close-btn" (click)="closeModal()">Continue Ordering</button>
+  </div>
+</div>

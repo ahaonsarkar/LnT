@@ -1,0 +1,21 @@
+<nav class="navbar">
+
+  <div class="logo">Tomato</div>
+
+  <div class="categories">
+    <button
+      *ngFor="let cat of categories"
+      class="cat-btn"
+      [class.active]="activeCategory === cat.id"
+      (click)="setCategory(cat.id)"
+    >
+      {{ cat.name }}
+    </button>
+  </div>
+
+  <button class="cart-btn" (click)="openCart()">
+    Cart
+    <span *ngIf="cartCount > 0" class="cart-badge">{{ cartCount }}</span>
+  </button>
+
+</nav>

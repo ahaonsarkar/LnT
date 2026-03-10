@@ -1,0 +1,20 @@
+<section class="menu-section">
+
+  <div class="section-header">
+    <h2 class="section-title">{{ categoryName }}</h2>
+    <span class="item-count">{{ itemCount }} items</span>
+  </div>
+
+  <div *ngIf="itemCount === 0" class="empty-state">
+    <p class="empty-title">No dishes found</p>
+    <p>Try a different category.</p>
+  </div>
+
+  <div class="menu-grid">
+    <app-menu-card
+      *ngFor="let item of items; trackBy: trackById"
+      [item]="item"
+    ></app-menu-card>
+  </div>
+
+</section>
